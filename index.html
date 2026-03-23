@@ -193,10 +193,10 @@
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(26, 32, 44, 0.8);
+      background: rgba(26, 32, 44, 0.95);
       backdrop-filter: blur(20px);
       padding: 16px 0;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 2px solid var(--border);
       z-index: 100;
       animation: slideInLeft 0.6s ease;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -225,6 +225,17 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo svg {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      filter: drop-shadow(0 0 8px rgba(61,155,255,0.5));
+      animation: float 3s ease-in-out infinite;
     }
 
     .nav-logo:hover { 
@@ -232,6 +243,47 @@
       transform: scale(1.15) rotate(2deg);
       letter-spacing: 4px;
       filter: drop-shadow(0 0 8px rgba(61,155,255,0.5));
+    }
+
+    .nav-logo:hover svg {
+      animation: rotateGradient 1s linear infinite;
+    }
+
+    .nav-links {
+      display: none;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: var(--ff-head);
+      font-weight: 600;
+      font-size: 0.95rem;
+      position: relative;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .nav-link:hover {
+      color: var(--accent2);
+      transform: translateY(-2px);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
     }
 
     /* MOBILE MENU */
@@ -1001,6 +1053,10 @@
       nav { padding: 12px 0; }
       section { padding: 80px 0; }
       
+      .nav-links {
+        display: none !important;
+      }
+
       .mobile-menu-btn {
         display: flex;
       }
@@ -1013,6 +1069,21 @@
       input[type="email"],
       textarea {
         font-size: 16px; /* Prevents zoom on iOS */
+      }
+    }
+
+    @media (min-width: 769px) {
+      .mobile-menu-btn {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: none !important;
+      }
+
+      .nav-logo svg {
+        width: 28px;
+        height: 28px;
       }
     }
 
@@ -1032,6 +1103,86 @@
 
     .skip-link:focus {
       top: 0;
+    }
+
+    /* CUSTOM CURSOR */
+    cursor {
+      pointer-events: none;
+    }
+
+    body {
+      cursor: none;
+    }
+
+    .cursor {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease;
+      box-shadow: 0 0 10px rgba(61,155,255,0.5), inset 0 0 10px rgba(61,155,255,0.2);
+      backdrop-filter: blur(4px);
+    }
+
+    .cursor.active {
+      animation: cursorPulse 0.4s ease-out;
+      box-shadow: 0 0 20px rgba(61,155,255,0.8), inset 0 0 15px rgba(61,155,255,0.4), 0 0 40px rgba(240,192,64,0.3);
+    }
+
+    .cursor::before {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .cursor::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      opacity: 0;
+      animation: cursorRing 0.6s ease-out forwards;
+    }
+
+    @keyframes cursorPulse {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 20px rgba(61,155,255,0.8), inset 0 0 15px rgba(61,155,255,0.4), 0 0 40px rgba(240,192,64,0.3);
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.2);
+        box-shadow: 0 0 10px rgba(61,155,255,0.5), inset 0 0 10px rgba(61,155,255,0.2);
+      }
+    }
+
+    @keyframes cursorRing {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    a, button, .skill-pill, .blog-filter-btn, input, textarea {
+      cursor: pointer;
     }
 
     /* PRINT STYLES */
@@ -1132,15 +1283,49 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#hero" class="nav-logo">MM</a>
+    <a href="#hero" class="nav-logo">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#3D9BFF;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#F0C040;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Outer circle -->
+        <circle cx="50" cy="50" r="48" fill="none" stroke="url(#logoGrad)" stroke-width="2" opacity="0.6"/>
+        <!-- Inner circle -->
+        <circle cx="50" cy="50" r="35" fill="none" stroke="url(#logoGrad)" stroke-width="1.5" opacity="0.4"/>
+        <!-- M Letter -->
+        <text x="50" y="60" font-size="48" font-weight="bold" fill="url(#logoGrad)" text-anchor="middle" font-family="'Syne', sans-serif">M</text>
+        <!-- Accent dots -->
+        <circle cx="30" cy="25" r="3" fill="#3D9BFF" opacity="0.8"/>
+        <circle cx="70" cy="75" r="3" fill="#F0C040" opacity="0.8"/>
+      </svg>
+      MM
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <div class="nav-links">
+      <a href="#about" class="nav-link">Chi Sono</a>
+      <a href="#skills" class="nav-link">Competenze</a>
+      <a href="#projects" class="nav-link">Progetti</a>
+      <a href="#papers" class="nav-link">Pubblicazioni</a>
+      <a href="#blog" class="nav-link">Blog</a>
+      <a href="#contact" class="nav-link">Contatti</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
     <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
+
+    <!-- Mobile Menu -->
     <div id="mobile-menu" class="mobile-menu hidden">
       <a href="#hero" class="mobile-menu-link">Home</a>
       <a href="#about" class="mobile-menu-link">Chi Sono</a>
+      <a href="#skills" class="mobile-menu-link">Competenze</a>
       <a href="#projects" class="mobile-menu-link">Progetti</a>
       <a href="#experience" class="mobile-menu-link">Esperienza</a>
       <a href="#papers" class="mobile-menu-link">Pubblicazioni</a>
@@ -1534,6 +1719,108 @@
       <ul style="list-style: none; font-size: 0.9rem; line-height: 2;\">\n        <li><a href=\"https://www.linkedin.com/in/mattia-martinelli-717088195/\" target=\"_blank\" style=\"color: var(--muted); text-decoration: none; transition: all 0.3s ease;\">LinkedIn</a></li>\n        <li><a href=\"https://github.com/MattMattw\" target=\"_blank\" style=\"color: var(--muted); text-decoration: none; transition: all 0.3s ease;\">GitHub</a></li>\n        <li><a href=\"mailto:martinellimattia@protonmail.com\" style=\"color: var(--muted); text-decoration: none; transition: all 0.3s ease;\">Email</a></li>\n      </ul>\n    </div>\n  </div>\n  <div style=\"border-top: 1px solid var(--border); padding-top: 30px; text-align: center;\">\n    <p style=\"font-size: 0.85rem; letter-spacing: 0.5px;\">© 2024-2026 Mattia Martinelli · ML Engineering Portfolio · Designed with ❤️</p>\n    <p style=\"font-size: 0.8rem; color: var(--muted); margin-top: 10px;\">Powered by vanilla HTML, CSS & JavaScript on GitHub Pages</p>\n  </div>\n</footer>
 
 <script>
+  // ===== CUSTOM CURSOR =====
+  const cursor = document.createElement('div');
+  cursor.className = 'cursor';
+  document.body.appendChild(cursor);
+
+  let isClickable = false;
+  let cursorX = 0;
+  let cursorY = 0;
+
+  // Update cursor position
+  document.addEventListener('mousemove', (e) => {
+    cursorX = e.clientX;
+    cursorY = e.clientY;
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top = cursorY + 'px';
+  });
+
+  // Check if hovering clickable element
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target;
+    if (
+      target.tagName === 'A' ||
+      target.tagName === 'BUTTON' ||
+      target.classList.contains('skill-pill') ||
+      target.classList.contains('blog-filter-btn') ||
+      target.classList.contains('project-card') ||
+      target.classList.contains('contact-link') ||
+      target.classList.contains('blog-card') ||
+      target.tagName === 'INPUT' ||
+      target.tagName === 'TEXTAREA'
+    ) {
+      isClickable = true;
+      cursor.style.width = '48px';
+      cursor.style.height = '48px';
+      cursor.style.borderWidth = '2px';
+      cursor.style.borderColor = 'var(--gold)';
+      cursor.style.boxShadow = '0 0 20px rgba(240,192,64,0.8), inset 0 0 15px rgba(240,192,64,0.4)';
+    } else {
+      isClickable = false;
+      cursor.style.width = '32px';
+      cursor.style.height = '32px';
+      cursor.style.borderWidth = '2px';
+      cursor.style.borderColor = 'var(--accent)';
+      cursor.style.boxShadow = '0 0 10px rgba(61,155,255,0.5), inset 0 0 10px rgba(61,155,255,0.2)';
+    }
+  });
+
+  // Click animation
+  document.addEventListener('mousedown', () => {
+    cursor.classList.add('active');
+  });
+
+  document.addEventListener('mouseup', () => {
+    cursor.classList.remove('active');
+  });
+
+  // Hide cursor when leaving window
+  document.addEventListener('mouseleave', () => {
+    cursor.style.opacity = '0';
+  });
+
+  document.addEventListener('mouseenter', () => {
+    cursor.style.opacity = '1';
+  });
+
+  // ===== DESKTOP NAV LINKS VISIBILITY =====
+  const navLinks = document.querySelector('.nav-links');
+  let lastScrollTop = 0;
+  const scrollThreshold = 100;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (currentScroll > scrollThreshold) {
+      // Show desktop nav links on scroll
+      if (navLinks && !navLinks.style.display) {
+        navLinks.style.display = 'flex';
+        navLinks.style.animation = 'fadeInUp 0.4s ease';
+      }
+    } else {
+      // Hide on top of page for mobile
+      if (navLinks && window.innerWidth < 768) {
+        navLinks.style.display = 'none';
+      }
+    }
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+
+  // Show nav links on desktop on load
+  if (window.innerWidth >= 768) {
+    navLinks.style.display = 'flex';
+  }
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      navLinks.style.display = 'flex';
+    } else {
+      navLinks.style.display = 'none';
+    }
+  });
+
   // Mobile menu toggle
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
