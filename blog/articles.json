@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ml-time-series-forecast",
+    "title": "Machine Learning per Time Series Forecasting: Guida Pratica",
+    "date": "2024-03-15",
+    "category": "Machine Learning",
+    "tags": ["python", "time-series", "forecasting", "xgboost"],
+    "description": "Come costruire modelli di previsione robusti usando LSTM, XGBoost e tecniche di feature engineering. Approfondimento su validazione temporale e metriche di performance.",
+    "author": "Mattia Martinelli",
+    "readTime": "12 min",
+    "url": "https://medium.com/@mattia",
+    "externalLink": true
+  },
+  {
+    "id": "etl-pipeline-production",
+    "title": "Implementare ETL Pipeline Production-Ready con Python",
+    "date": "2024-02-28",
+    "category": "Data Engineering",
+    "tags": ["python", "etl", "pipeline", "production"],
+    "description": "Best practices per design e deployment di pipeline ETL scalabili. Handling di errori, logging, monitoring e orchestration con Apache Airflow.",
+    "author": "Mattia Martinelli",
+    "readTime": "15 min",
+    "url": "https://dev.to/@mattia",
+    "externalLink": true
+  },
+  {
+    "id": "aerospace-data-systems",
+    "title": "Data-Driven Systems nel Settore Aerospace: Opportunità e Sfide",
+    "date": "2024-02-10",
+    "category": "Aerospace",
+    "tags": ["aerospace", "data-science", "satellite", "systems"],
+    "description": "Analisi delle applicazioni di machine learning nei sistemi satellitari, environmental monitoring e predictive maintenance. Case studies dal settore.",
+    "author": "Mattia Martinelli",
+    "readTime": "10 min",
+    "url": "https://www.linkedin.com/pulse/mattia-martinelli",
+    "externalLink": true
+  },
+  {
+    "id": "api-rest-design",
+    "title": "Design di API REST Scalabili: Dalla Teoria alla Pratica",
+    "date": "2024-01-25",
+    "category": "Backend",
+    "tags": ["api", "rest", "design", "fastapi"],
+    "description": "Come progettare e implementare API REST produzione-ready con versionamento, caching, rate-limiting e autenticazione sicura.",
+    "author": "Mattia Martinelli",
+    "readTime": "11 min",
+    "url": "https://hashnode.com/@mattia",
+    "externalLink": true
+  },
+  {
+    "id": "feature-engineering-mldp",
+    "title": "Feature Engineering: L'Arte Nascosta del Machine Learning",
+    "date": "2024-01-10",
+    "category": "Machine Learning",
+    "tags": ["feature-engineering", "ml", "data-prep"],
+    "description": "Tecniche avanzate di feature engineering che migliorano performance di modelli: encoding, scaling, polynomial features, domain knowledge.",
+    "author": "Mattia Martinelli",
+    "readTime": "13 min",
+    "url": "https://medium.com/@mattia",
+    "externalLink": true
+  }
+]
